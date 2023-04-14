@@ -1,12 +1,25 @@
 package com.curso.ecommerce.springecommerce.model;
 
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "USERS")
 public class User {
     
+    // Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String username;
@@ -15,6 +28,13 @@ public class User {
     private String phone;
     private String tipo;
 
+    // Relaciones
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
+    // Metodos constructores y toString
     public User() {
 
     }
